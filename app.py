@@ -10,7 +10,7 @@ genai.configure(api_key=os.environ["GENAI_API_KEY"])
 api_key = os.environ.get("GENAI_API_KEY")
 if not api_key:
     print("Error: GENAI_API_KEY is missing")
-    raise ValueError("GENAI_API_KEY is missing")
+    raise ValueError("GENAI_API_KEY is missingg")
 
 
 
