@@ -5,6 +5,7 @@ from flask import Flask, flash, redirect, render_template, request, session, jso
 from werkzeug.security import check_password_hash, generate_password_hash
 import google.generativeai as genai
 from helpers import apology, login_required
+import markdown
 
 genai.configure(api_key=os.environ["GENAI_API_KEY"])
 api_key = os.environ.get("GENAI_API_KEY")
@@ -127,8 +128,19 @@ def chat():
                 ]
             )
 
-            response = chat.send_message(f"Analyze the symptoms: {symptoms}", stream=True)
-            diagnosis_text = "".join(chunk.text for chunk in response)
+            response = chat.send_message(
+                f"""Act as a medical assistant. Please analyze the following symptoms and provide:
+            1. A summary of possible causes.
+            2. A classification of severity (mild/moderate/severe).
+            3. Advice on whether to seek medical attention.
+            4. Output formatted clearly using headings and bullet points.
+
+            Symptoms: {symptoms}
+            """,
+                stream=True
+            )
+            diagnosis_text = "".join(chunk.text for chunk in response).strip()
+            diagnosis_text = markdown.markdown(diagnosis_text)
 
             # Save diagnosis entry to diagnosis_history table
             cursor.execute(
@@ -180,3 +192,5 @@ def aboutus():
 def logout():
     session.clear()
     return redirect("/")
+if __name__ == "__main__":
+    app.run(debug=True)

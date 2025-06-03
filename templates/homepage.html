@@ -36,41 +36,50 @@
                 /* background-color: #387478; */
                 height:20vh;
                 display: flex;
-                justify-content: center;
-                align-items:end;
+                justify-content: flex-start;
+                align-items: flex-start;
+                
             }
             .navb{
-                position: fixed;
-                top: 88vh; /* Adjust to where you want it */
-                left: 50%; /* Center horizontally */
-                transform: translateX(-50%); /* Center adjustment */
-                height: 9vh;
-                width: 30vw;
-                background: linear-gradient(45deg, #243642, #387478, #629584, #E2F1E7);
+                 /* Center adjustment */
                 border-radius: 80px;
-                z-index: 1000;
+                margin-top:-70px;
+                width:25vw;
+                color: white;
+                display: inline-block;
             }
             #nav-icons{
-                transition: transform 0.5s ease-in;
+                transition: transform 0.1s ease-in;
             }
             #nav-icons:hover{
-                transform: translateY(-10px);
+                transform: translateY(-5px);
             }
-            ul{
+            .lastelements {
+                margin-top: -70px;
+                width: 25vw;  /* You can adjust or remove if you want full width */
+                color: white;
+                display: inline-block;  /* inline-block may cause spacing; consider block */
+            }
+
+            ul {
                 height: 8.2vh;
                 display: flex;
                 list-style: none;
-                justify-content: space-evenly;
-                align-items:center;    
+                justify-content: flex-start;  /* aligns items left */
+                gap: 50px;
+                padding-left: 0;  /* remove default ul padding */
+                margin-left: 0;   /* remove default ul margin */
             }
-            ul li{
-                padding: 15px;
-                color:black;
+
+            ul li {
+                color: black;
             }
-            ul li a{
+
+            ul li a {
                 color: black;
                 text-decoration: none;
             }
+
 
             .image {
                 margin-top: 24px;
@@ -138,15 +147,10 @@
                 color: white;
                 font-size:xx-large;
             }
-            .lastelements{
-                margin-top:-80px;
-                width:25vw;
-            color: white;
-                display: inline-block;
-            }
             #lelem{
                 display: flex;
-                justify-content: end;
+                padding-left: 10%;
+                padding-top: 2%;
                 height: 12vh;
             }
             .btn1,.btn2,.btn{
@@ -273,14 +277,57 @@
     </div>
 </nav>
 <nav id="lelem">
+       
+
     <div class="lastelements">
         <ul>
-            <li><button class="btn" id="toggleButton"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path></svg></button></li>
-            <li><button class="btn1"><a target="_blank" href="/login"></a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="m13 16 5-4-5-4v3H4v2h9z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path></svg></button></li>
-            <li><button class="btn2"><a target="_blank" href="/profile"></a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M20 2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-6 2.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM19 15H9v-.25C9 12.901 11.254 11 14 11s5 1.901 5 3.75V15z"></path><path d="M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8z"></path></svg></button></li>
+            <!-- Toggle Button -->
+             <li>
+                        <a target="_blank" href="/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" fill="none" style="fill: none; stroke: rgb(255, 253, 253)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </a>
+                        </li>
+                    </svg></a></li>
+                    <li><a  href="/history"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M12 8v5h5v-2h-3V8z"></path><path d="M21.292 8.497a8.957 8.957 0 0 0-1.928-2.862 9.004 9.004 0 0 0-4.55-2.452 9.09 9.09 0 0 0-3.626 0 8.965 8.965 0 0 0-4.552 2.453 9.048 9.048 0 0 0-1.928 2.86A8.963 8.963 0 0 0 4 12l.001.025H2L5 16l3-3.975H6.001L6 12a6.957 6.957 0 0 1 1.195-3.913 7.066 7.066 0 0 1 1.891-1.892 7.034 7.034 0 0 1 2.503-1.054 7.003 7.003 0 0 1 8.269 5.445 7.117 7.117 0 0 1 0 2.824 6.936 6.936 0 0 1-1.054 2.503c-.25.371-.537.72-.854 1.036a7.058 7.058 0 0 1-2.225 1.501 6.98 6.98 0 0 1-1.313.408 7.117 7.117 0 0 1-2.823 0 6.957 6.957 0 0 1-2.501-1.053 7.066 7.066 0 0 1-1.037-.855l-1.414 1.414A8.985 8.985 0 0 0 13 21a9.05 9.05 0 0 0 3.503-.707 9.009 9.009 0 0 0 3.959-3.26A8.968 8.968 0 0 0 22 12a8.928 8.928 0 0 0-.708-3.503z"></path></svg></a></li>
+                    <li><a  href="/chat"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgb(255, 253, 253);transform: ;msFilter:;"><path d="M5 18v3.766l1.515-.909L11.277 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h1zM4 8h12v8h-5.277L7 18.234V16H4V8z"></path><path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path></svg></a></li>
+                    <li><a  href="/aboutus"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: none; stroke: rgb(255, 254, 254);">
+                    <path d="M20.954 10.667c-.072-.322-.272-.621-.502-.745-.07-.039-.522-.088-1.004-.109-.809-.036-.898-.052-1.152-.201-.405-.237-.516-.493-.518-1.187-.002-1.327-.554-2.559-1.646-3.67-.776-.793-1.645-1.329-2.634-1.629-.236-.072-.768-.097-2.545-.118-2.787-.033-3.405.024-4.356.402-1.748.697-3.008 2.166-3.465 4.05-.087.353-.103.92-.124 4.177-.025 4.08.004 4.68.258 5.488.212.668.425 1.077.861 1.657.835 1.108 2.083 1.907 3.334 2.133.595.107 7.931.135 8.683.032 1.306-.178 2.331-.702 3.293-1.684.694-.71 1.129-1.479 1.414-2.499.117-.424.127-.63.149-3.117.017-1.878.002-2.758-.046-2.98zM8.007 8.108c.313-.316.399-.329 2.364-.329 1.764 0 1.822.004 2.081.134.375.189.538.456.538.88 0 .384-.153.653-.493.869-.184.115-.293.123-2.021.133-1.067.007-1.916-.013-2.043-.048-.669-.184-.918-1.143-.426-1.639zm7.706 8.037-.597.098-3.114.035c-2.736.033-3.511-.018-3.652-.08-.288-.124-.554-.472-.602-.78-.042-.292.104-.696.33-.9.285-.257.409-.266 3.911-.27 3.602-.002 3.583-.003 3.925.315.482.45.381 1.251-.201 1.582z" stroke-width="2" fill="none"></path>
+                </svg>
+            </a></li>
+            <li><a target="_blank" href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgb(255, 255, 255);transform: ;msFilter:;"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path></svg></a></li>
+       
+            <li>
+                <a href="#" id="toggleButton" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
+                        <path d="M20.742 13.045a8.088 8.088 0 0 1-2.077.271c-2.135 0-4.14-.83-5.646-2.336a8.025 8.025 0 0 1-2.064-7.723A1 1 0 0 0 9.73 2.034a10.014 10.014 0 0 0-4.489 2.582c-3.898 3.898-3.898 10.243 0 14.143a9.937 9.937 0 0 0 7.072 2.93 9.93 9.93 0 0 0 7.07-2.929 10.007 10.007 0 0 0 2.583-4.491 1.001 1.001 0 0 0-1.224-1.224zm-2.772 4.301a7.947 7.947 0 0 1-5.656 2.343 7.953 7.953 0 0 1-5.658-2.344c-3.118-3.119-3.118-8.195 0-11.314a7.923 7.923 0 0 1 2.06-1.483 10.027 10.027 0 0 0 2.89 7.848 9.972 9.972 0 0 0 7.848 2.891 8.036 8.036 0 0 1-1.484 2.059z"></path>
+                    </svg>
+                </a>
+            </li>
+
+            <!-- Login Button -->
+            <li>
+                <a href="/login" target="_blank" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
+                        <path d="m13 16 5-4-5-4v3H4v2h9z"></path>
+                        <path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path>
+                    </svg>
+                </a>
+            </li>
+
+            <!-- Profile Button -->
+            <li>
+                <a href="/profile" target="_blank" class="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
+                        <path d="M20 2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-6 2.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM19 15H9v-.25C9 12.901 11.254 11 14 11s5 1.901 5 3.75V15z"></path>
+                        <path d="M4 8H2v12c0 1.103.897 2 2 2h12v-2H4V8z"></path>
+                    </svg>
+                </a>
+            </li>
         </ul>
+
     </div>
 </nav>
+
 <!-- well create a parent for both of them to occur in one page -->
 <div class="parent">
     <div class="pop-up">
@@ -296,25 +343,6 @@
         <img class="comeup" src="/static/ai.png" alt="">
     </div>
 </div>
-<div class="bar">
-    <div class="navb">
-             <ul class="item">
-                 <li>
-                     <a target="_blank" href="/">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        </a>
-                    </li>
-                </svg></a></li>
-                <li><a  href="/history"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 8v5h5v-2h-3V8z"></path><path d="M21.292 8.497a8.957 8.957 0 0 0-1.928-2.862 9.004 9.004 0 0 0-4.55-2.452 9.09 9.09 0 0 0-3.626 0 8.965 8.965 0 0 0-4.552 2.453 9.048 9.048 0 0 0-1.928 2.86A8.963 8.963 0 0 0 4 12l.001.025H2L5 16l3-3.975H6.001L6 12a6.957 6.957 0 0 1 1.195-3.913 7.066 7.066 0 0 1 1.891-1.892 7.034 7.034 0 0 1 2.503-1.054 7.003 7.003 0 0 1 8.269 5.445 7.117 7.117 0 0 1 0 2.824 6.936 6.936 0 0 1-1.054 2.503c-.25.371-.537.72-.854 1.036a7.058 7.058 0 0 1-2.225 1.501 6.98 6.98 0 0 1-1.313.408 7.117 7.117 0 0 1-2.823 0 6.957 6.957 0 0 1-2.501-1.053 7.066 7.066 0 0 1-1.037-.855l-1.414 1.414A8.985 8.985 0 0 0 13 21a9.05 9.05 0 0 0 3.503-.707 9.009 9.009 0 0 0 3.959-3.26A8.968 8.968 0 0 0 22 12a8.928 8.928 0 0 0-.708-3.503z"></path></svg></a></li>
-                <li><a  href="/chat"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M5 18v3.766l1.515-.909L11.277 18H16c1.103 0 2-.897 2-2V8c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h1zM4 8h12v8h-5.277L7 18.234V16H4V8z"></path><path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path></svg></a></li>
-                <li><a  href="/aboutus"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: none; stroke: rgba(0, 0, 0, 1);">
-                <path d="M20.954 10.667c-.072-.322-.272-.621-.502-.745-.07-.039-.522-.088-1.004-.109-.809-.036-.898-.052-1.152-.201-.405-.237-.516-.493-.518-1.187-.002-1.327-.554-2.559-1.646-3.67-.776-.793-1.645-1.329-2.634-1.629-.236-.072-.768-.097-2.545-.118-2.787-.033-3.405.024-4.356.402-1.748.697-3.008 2.166-3.465 4.05-.087.353-.103.92-.124 4.177-.025 4.08.004 4.68.258 5.488.212.668.425 1.077.861 1.657.835 1.108 2.083 1.907 3.334 2.133.595.107 7.931.135 8.683.032 1.306-.178 2.331-.702 3.293-1.684.694-.71 1.129-1.479 1.414-2.499.117-.424.127-.63.149-3.117.017-1.878.002-2.758-.046-2.98zM8.007 8.108c.313-.316.399-.329 2.364-.329 1.764 0 1.822.004 2.081.134.375.189.538.456.538.88 0 .384-.153.653-.493.869-.184.115-.293.123-2.021.133-1.067.007-1.916-.013-2.043-.048-.669-.184-.918-1.143-.426-1.639zm7.706 8.037-.597.098-3.114.035c-2.736.033-3.511-.018-3.652-.08-.288-.124-.554-.472-.602-.78-.042-.292.104-.696.33-.9.285-.257.409-.266 3.911-.27 3.602-.002 3.583-.003 3.925.315.482.45.381 1.251-.201 1.582z" stroke="currentColor" stroke-width="2" fill="none"></path>
-            </svg>
-        </a></li>
-        <li><a target="_blank" href="/logout"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" id="nav-icons" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M16 13v-2H7V8l-5 4 5 4v-3z"></path><path d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z"></path></svg></a></li>
-    </ul>
-</div>
-</div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -322,41 +350,34 @@
 <script>
     gsap.from(".comeup",{
         opacity:0,
-        duration:2.2, 
+        duration:0.5, 
         y:20,
-        delay:1,
+        delay:1
     })
     gsap.from(".intro",{
         opacity:0,
         duration:0.5,
         y:20,
-        delay:0,
-        stagger:1
+        delay:0
     })
     gsap.from(".para",{
         opacity:0,
-        duration:1,
+        duration:0.5,
         y:20,
-        delay:3.2,
+        delay:1,
     })
     gsap.from(".navb",{
         opacity:0,
         duration:0.2,
         y:10,
         delay:1,
-        scrollTrigger:{
-            trigger:".new-section",
-            scroller:"body",
-            scrub:5
-        }
+
     })
     gsap.from("#details",{
         opacity:0,
         duration:1,
         y:20,
-        delay:3,
-        stagger:1
-    })
+        delay:2    })
 
 </script>
 </body>
