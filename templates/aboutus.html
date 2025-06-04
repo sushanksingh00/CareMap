@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Our Team</title>
+    <title>About the project</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&display=swap');
 
@@ -21,10 +22,11 @@
             flex-direction: column;
             align-items: center;
             font-family: 'Figtree', sans-serif;
-            color: #fff;
+            color: #ffffff;
             padding: 20px;
             position: relative;
             overflow: hidden;
+            background-color: white;
         }
 
         /* Background Image */
@@ -54,6 +56,13 @@
         .new-section {
             margin: 20px 0;
             text-align: center;
+            
+        }
+        .carousel {
+            /* font-size: 2rem;
+            font-weight: 700; */
+            color: black;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
@@ -130,46 +139,40 @@
 <body>
 
     <!-- Background Image -->
-    <div class="background-image"></div>
+    <!-- <div class="background-image"></div> -->
     <!-- Blur Overlay -->
-    <div class="blur-overlay"></div>
+    <!-- <div class="blur-overlay"></div> -->
 
     <!-- Content Section -->
-    <div class="new-section">
-        <h1 class="carousel">About The Team</h1>
-    </div>
+<div class="container mt-5 bg-grey p-4 rounded shadow text-dark">
 
-    <div class="team-member">
-        <img src="/static/dheeru.jpg" alt="Dheerendra" id="dheerendra">
-        <div class="details">
-            <h2>Dheerendra</h2>
-            <p>Our Team Leader has expertise in team management and a vast knowledge of programming languages.</p>
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center mb-4 mb-md-0">
+            <img src="/static/sushank.jpg" alt="Sushank" id="sushank" class="img-fluid rounded-circle shadow" style="max-width: 200px;">
+        </div>
+        <div class="col-md-8">
+            <h2 class="mb-3">Created by Sushank</h2>
+            <p>
+                This project is a personalized AI assistant web application built using 
+                <strong>Flask (Python)</strong> as the backend framework. It integrates 
+                <strong>Gemini AI</strong>, a generative AI model, to deliver intelligent, context-aware, 
+                and customized responses based on user input.
+            </p>
+            <p>
+                The frontend is developed using <strong>HTML</strong> and <strong>CSS</strong> with a clean, 
+                responsive layout. For data storage and history tracking, the application uses 
+                <strong>SQL</strong> to save and retrieve extended details of the user’s previous interactions.
+            </p>
+            <p>
+                By combining modern AI capabilities with a robust web and database stack, the app offers 
+                a smart, personalized, and efficient user experience.
+            </p>
         </div>
     </div>
+</div>
 
-    <div class="team-member">
-        <img src="/static/sushank.jpg" alt="Sushank" id="sushank">
-        <div class="details">
-            <h2>Sushank</h2>
-            <p>Plays a vital role in back-end development, particularly knows how to synchronize and make efficient use of the program. He has expertise in Flask, Python, JavaScript, C, C++, and many more.</p>
-        </div>
-    </div>
 
-    <div class="team-member">
-        <img src="/static/rishabh.jpg" alt="Rishabh" id="rishabh">
-        <div class="details">
-            <h2>Rishabh</h2>
-            <p>A Front-End Developer with vast knowledge of HTML, CSS, and trending frameworks such as React, GSAP, and THREE.js.</p>
-        </div>
-    </div>
 
-    <div class="team-member">
-        <img src="/static/aditya.jpg" alt="Aditya" id="aditya">
-        <div class="details">
-            <h2>Aditya</h2>
-            <p>A Back-End Manager and developer who has mastered SQL and NoSQL, effectively fetching APIs in the program.</p>
-        </div>
-    </div>
 
     <button class="btn-back" onclick="window.history.back()">Go Back</button>
 

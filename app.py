@@ -139,16 +139,16 @@ def chat():
             """,
                 stream=True
             )
-            diagnosis_text = "".join(chunk.text for chunk in response).strip()
-            diagnosis_text = markdown.markdown(diagnosis_text)
+            diagnosis_text1 = "".join(chunk.text for chunk in response).strip()
+            diagnosis_text = markdown.markdown(diagnosis_text1)
 
             # Save diagnosis entry to diagnosis_history table
             cursor.execute(
                 """
-                INSERT INTO diagnosis_history (user_id, name, age, symptoms, diagnosis)
+                INSERT INTO diagnosis_history  (user_id, name, age, symptoms, diagnosis)
                 VALUES (?, ?, ?, ?, ?)
                 """,
-                (session.get("user_id"), request.form.get("name"), request.form.get("age"), symptoms, diagnosis_text)
+                (session.get("user_id"), request.form.get("name"), request.form.get("age"), symptoms, diagnosis_text1)
             )
             db.commit()
             return render_template("result.html", symp=diagnosis_text)
