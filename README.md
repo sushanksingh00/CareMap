@@ -1,46 +1,50 @@
-CareMap 🩺🤖
-CareMap is an AI-powered health assistant designed to assess user-reported symptoms and provide personalized health insights. Built with Flask, HTML/CSS/JavaScript, and a SQL database, CareMap offers an intuitive web interface and stores your interaction history securely for better continuity and care.
 
-🌟 Features
-🧠 AI Symptom Analysis using Generative AI (Google GenAI API)
 
-📊 Personalized Health Output based on user symptoms
+# CareMap 🩺🤖
 
-🗂️ History Tracking with SQL database storage
+**CareMap** is an AI-powered health assistant that helps users assess their symptoms and receive personalized insights. It is built using Flask for the backend and HTML, CSS, and JavaScript for the frontend. A SQL database is used to store your symptom history securely.
 
-🌐 Responsive UI using HTML, CSS, and JavaScript
+To use CareMap's AI features, you need a **Google Generative AI (GenAI) API key**.
 
-🔐 User Authentication (optional enhancement)
+---
 
-🚀 Tech Stack
-Backend: Flask (Python)
+## Features
 
-Frontend: HTML, CSS, JavaScript
+* AI-powered symptom analysis
+* Personalized health suggestions
+* Symptom history tracking using SQL
+* Clean and responsive web interface
 
-Database: SQLite
+---
 
-AI Integration: Google Generative AI API
+## Tech Stack
 
-🔐 Requirements
-Python 3.7+
+* **Backend**: Flask (Python)
+* **Frontend**: HTML, CSS, JavaScript
+* **Database**: SQLite
+* **AI Integration**: Google Generative AI API
 
-Google GenAI API Key
+---
 
-Internet connection for API access
+## Requirements
 
-🛠️ Future Improvements
-Add user authentication and login system
+* Python 3.7+
+* Google GenAI API key
+* Internet connection
 
-Show symptom history graphically
+---
 
-Integrate with medical databases (e.g., WebMD, Mayo Clinic APIs)
+## Future Plans
 
-Add doctor connection module for real consultation
+* User login and authentication
+* Graph-based symptom history
+* Integration with medical knowledge APIs
+* Doctor consultation feature
 
-📜 License
+---
+
+## License
+
 This project is licensed under the MIT License.
 
-🙌 Acknowledgments
-Google Generative AI for powerful text generation
 
-Flask for lightweight and flexible web development
