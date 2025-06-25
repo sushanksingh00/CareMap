@@ -2,6 +2,10 @@
 
 # CareMap 🩺🤖
 
+#### Video Demo: https://www.youtube.com/watch?v=kwQX0F6eih4
+
+#### Description:
+
 **CareMap** is an AI-powered health assistant that helps users assess their symptoms and receive personalized insights. It is built using Flask for the backend and HTML, CSS, and JavaScript for the frontend. A SQL database is used to store your symptom history securely.
 
 To use CareMap's AI features, you need a **Google Generative AI (GenAI) API key**.
