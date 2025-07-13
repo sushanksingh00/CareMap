@@ -1,10 +1,10 @@
-
 import os
 import sqlite3
 from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 import google.generativeai as genai
-from helpers import apology, login_required
+from helpers import apology, login_requiredpip install submit50
+
 import markdown
 
 genai.configure(api_key=os.environ["GENAI_API_KEY"])
