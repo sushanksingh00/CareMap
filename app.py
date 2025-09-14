@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 import google.generativeai as genai
-from helpers import apology, login_requiredpip install submit50
+from helpers import apology, login_required
 
 import markdown
 
