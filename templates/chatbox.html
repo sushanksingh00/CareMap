@@ -1,3 +1,17 @@
+{% extends "layouts.html" %}
+{% block title %}Chat | CareMap{% endblock %}
+{% block extra_head %}
+  <style>
+    body {
+      background-color: #ffffff; /* Bootstrap's secondary grey */
+      color: #ffffff; /* dark text */
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+{% endblock %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +61,11 @@
 </head>
 <body>
 
+{% block content %}
   <main class="main-container">
     <div class="form-container">
       <form action="/chat" method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input
@@ -59,6 +75,7 @@
             class="form-control"
             placeholder="Enter Your Name"
             required
+            value="{{ initial_name|default:'' }}"
           />
           <div class="invalid-feedback">Please enter your name.</div>
         </div>
@@ -73,6 +90,7 @@
             placeholder="Enter Your Age"
             min="0"
             required
+            value="{{ initial_age|default:'' }}"
           />
           <div class="invalid-feedback">Please enter your age.</div>
         </div>
@@ -96,6 +114,25 @@
       <button class="btn btn-outline-secondary w-100" onclick="window.history.back();">Go Back</button>
     </div>
   </main>
+{% endblock %}
+{% block extra_scripts %}
+  <script>
+    // Bootstrap form validation
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+{% endblock %}
 
   <script>
     // Bootstrap form validation

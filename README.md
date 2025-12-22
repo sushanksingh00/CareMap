@@ -1,5 +1,29 @@
 # CareMap
 
+Note: Project now uses Django for the web backend. The original Flask implementation is preserved under `flask_app/`.
+
+Quick start (Django):
+
+1. Create/activate a virtualenv and install deps:
+
+	- `pip install -r requirements.txt`
+
+2. Run database migrations:
+
+	- `python manage.py migrate`
+
+3. Start the dev server:
+
+	- `python manage.py runserver`
+
+App will be available at http://127.0.0.1:8000/.
+
+Flask version (preserved):
+
+- Code: `flask_app/`
+- Requirements: `flask_app/requirements.txt`
+- Original entry file: `flask_app/app.py`
+
 #### Video Demo: https://www.youtube.com/watch?v=kwQX0F6eih4
 
 #### Description:

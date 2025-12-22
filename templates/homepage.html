@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareMap</title>
+{% extends "layouts.html" %}
+{% block title %}CareMap{% endblock %}
+{% block extra_head %}
     <link href="/static/favicon.ico" rel="icon">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    
     <style>
         /* Prevent horizontal scrolling */
         html, body {
@@ -126,9 +118,30 @@
             height: 100%;
             overflow: hidden;
         }
+
+        /* New homepage layout */
+        .hero-banner {
+            width: 100%;
+            height: 60vh;
+            background: url('/static/2106.w023.n001.506B.p1.506.jpg') center center / cover no-repeat;
+            border-radius: 12px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .cta-buttons .btn {
+            padding: 10px 18px;
+            font-weight: 600;
+            border-radius: 10px;
+        }
     </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
@@ -155,7 +168,7 @@
                             </svg>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="/history">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="nav-icons" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 8v5h5v-2h-3V8z"></path>
@@ -170,7 +183,7 @@
                                 <path d="M20 2H8c-1.103 0-2 .897-2 2h12c1.103 0 2 .897 2 2v8c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"></path>
                             </svg>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="/aboutus">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="nav-icons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -214,79 +227,45 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Main Content: Rectangle banner, then buttons, then text -->
     <div class="container-fluid mt-5 pt-5">
-        <div class="row align-items-center">
-            <!-- Text Content -->
-            <div class="col-lg-6 col-md-12 order-md-1 order-2">
-                <div class="p-3 p-md-5">
-                    <h1 class="intro-text">Redefining</h1>
-                    <h1 class="intro-text">Healthcare Guidance</h1>
-                    <h1 class="intro-text">With Personalized</h1>
-                    <h1 class="intro-text">AI Symptom Analysis</h1>
-                    
-                    <p class="description-text">
-                        CareMap harnesses the power of artificial intelligence to provide you with instant, personalized insights into your symptoms. By analyzing your unique health data, it helps you understand potential causes and guides you toward informed next steps — all from the convenience of your device.
-                    </p>
-                    
-                    <p class="description-text">
-                        Designed to empower you with smarter, accessible healthcare advice, CareMap supports proactive well-being management.
-                    </p>
-                    
-                    <span class="disclaimer-text">
-                        Disclaimer: CareMap is an AI-powered tool intended to assist with symptom analysis and does not replace professional medical evaluation. Please consult a healthcare professional for accurate diagnosis and treatment decisions.
-                    </span>
-                </div>
+        <!-- Rectangle banner with the image -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="hero-banner"></div>
             </div>
-            
-            <!-- Image Content -->
-            <div class="col-lg-6 col-md-12 order-md-2 order-1">
-                <div class="image-container">
-                    <div class="gradient-curve position-absolute w-100 h-100"></div>
-                    <img class="ai-image img-fluid position-relative w-100" src="/static/ai.png" alt="AI Healthcare">
+        </div>
+
+        <!-- Buttons: history and start new chat -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="cta-buttons">
+                    <a href="/history" class="btn btn-light text-dark">View History</a>
+                    <a href="/chat" class="btn btn-primary">Start New Chat</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- GSAP Animation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    <script>
-        // GSAP Animations
-        gsap.from(".ai-image", {
-            opacity: 0,
-            duration: 0.5, 
-            y: 20,
-            delay: 1
-        });
-        
-        gsap.from(".intro-text", {
-            opacity: 0,
-            duration: 0.5,
-            y: 20,
-            delay: 0,
-            stagger: 0.1
-        });
-        
-        gsap.from(".description-text", {
-            opacity: 0,
-            duration: 0.5,
-            y: 20,
-            delay: 1,
-            stagger: 0.1
-        });
-        
-        gsap.from(".navbar-collapse", {
-            opacity: 0,
-            duration: 0.2,
-            y: 10,
-            delay: 1,
-        });
-    </script>
-</body>
-</html>
+        <!-- Text content under the buttons -->
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="intro-text text-center">Redefining</h1>
+                <h1 class="intro-text text-center">Healthcare Guidance</h1>
+                <h1 class="intro-text text-center">With Personalized</h1>
+                <h1 class="intro-text text-center">AI Symptom Analysis</h1>
+
+                <p class="description-text text-center">
+                    CareMap harnesses the power of artificial intelligence to provide you with instant, personalized insights into your symptoms. By analyzing your unique health data, it helps you understand potential causes and guides you toward informed next steps — all from the convenience of your device.
+                </p>
+                
+                <p class="description-text text-center">
+                    Designed to empower you with smarter, accessible healthcare advice, CareMap supports proactive well-being management.
+                </p>
+                
+                <span class="disclaimer-text text-center d-block">
+                    Disclaimer: CareMap is an AI-powered tool intended to assist with symptom analysis and does not replace professional medical evaluation. Please consult a healthcare professional for accurate diagnosis and treatment decisions.
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

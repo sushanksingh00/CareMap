@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagnosis Result</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+{% extends "layouts.html" %}
+{% block title %}Diagnosis Result | CareMap{% endblock %}
+{% block content %}
     <div class="container mt-5">
         <h1 class="text-center mb-4">Your Diagnosis & Remedies</h1>
 
@@ -25,7 +19,4 @@
             <a href="/history" class="btn btn-outline-info">View History</a>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}

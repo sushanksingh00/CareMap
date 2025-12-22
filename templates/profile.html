@@ -1,0 +1,75 @@
+{% extends "layouts.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 720px;">
+  <h2 class="mb-3">Your Profile</h2>
+
+  {% if saved %}
+  <div class="alert alert-success">Profile saved successfully.</div>
+  {% endif %}
+
+  <div class="card mb-4">
+    <div class="card-body d-flex gap-3 align-items-start">
+      <div>
+        {% if profile and profile.profile_photo_url %}
+          <img src="{{ profile.profile_photo_url }}" alt="Profile Photo" style="width:96px;height:96px;object-fit:cover;border-radius:50%;">
+        {% else %}
+          <div style="width:96px;height:96px;border-radius:50%;background:#e9ecef;display:flex;align-items:center;justify-content:center;color:#6c757d;">No Photo</div>
+        {% endif %}
+      </div>
+      <div>
+        <h5 class="card-title mb-1">{{ profile.name|default:request.user.username }}</h5>
+        <div class="text-muted small">
+          {% if profile and profile.age %}Age: {{ profile.age }} · {% endif %}
+          {% if profile and profile.city %}{{ profile.city }}{% if profile.country %}, {{ profile.country }}{% endif %}{% endif %}
+        </div>
+        <div class="mt-2">
+          {% if profile and profile.email %}<div>Email: {{ profile.email }}</div>{% endif %}
+          {% if profile and profile.phone_number %}<div>Phone: {{ profile.phone_number }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="mb-2">Edit Profile</h4>
+  <form method="post" class="card p-3">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" type="text" name="name" value="{{ profile.name|default:'' }}" placeholder="Your full name">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="email" name="email" value="{{ profile.email|default:'' }}" placeholder="you@example.com">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Phone Number</label>
+      <input class="form-control" type="text" name="phone_number" value="{{ profile.phone_number|default:'' }}" placeholder="+1 555 123 4567">
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">City</label>
+        <input class="form-control" type="text" name="city" value="{{ profile.city|default:'' }}" placeholder="City">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Country</label>
+        <input class="form-control" type="text" name="country" value="{{ profile.country|default:'' }}" placeholder="Country">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Age</label>
+        <input class="form-control" type="number" min="0" name="age" value="{{ profile.age|default:'' }}" placeholder="e.g. 30">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Profile Photo URL</label>
+        <input class="form-control" type="url" name="profile_photo_url" value="{{ profile.profile_photo_url|default:'' }}" placeholder="https://...">
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary" type="submit">Save Profile</button>
+      <a class="btn btn-secondary" href="/">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

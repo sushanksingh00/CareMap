@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> gesehg</title>
-    </head>
-    <body>
+{% extends "layouts.html" %}
+{% block title %}Error {{ top }} | CareMap{% endblock %}
+{% block content %}
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <img alt="{{ top }}" class="border img-fluid" src="https://api.memegen.link/images/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?background=https://i.imgur.com/CsCgN7Ll.png&width=400" title="{{ top }}">
-    </body>
-</html>
+    </div>
+{% endblock %}
