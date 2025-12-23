@@ -20,7 +20,15 @@ def apology(request: HttpRequest, message: str, code: int = 400) -> HttpResponse
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    return render(request, 'homepage.html')
+    profile_photo_url = None
+    if request.user.is_authenticated:
+        profile = getattr(request.user, 'profile', None)
+        if profile and getattr(profile, 'profile_photo_url', ''):
+            profile_photo_url = profile.profile_photo_url
+
+    return render(request, 'homepage.html', {
+        'profile_photo_url': profile_photo_url,
+    })
 
 
 @require_http_methods(["GET", "POST"])
@@ -74,6 +82,8 @@ def chat_view(request: HttpRequest) -> HttpResponse:
             return render(request, 'apology.html', {'top': 403, 'bottom': 'must provide name, age, and symptoms'}, status=403)
 
         api_key = os.environ.get('GOOGLE_API_KEY') or os.environ.get('GENAI_API_KEY')
+        api_key = "AIzaSyB2my6BPN59Wm7nHsJm8SKt2705lnxUKZg"
+
         if not api_key:
             return render(request, 'apology.html', {'top': 500, 'bottom': 'Google API key missing. Set GOOGLE_API_KEY.'}, status=500)
 

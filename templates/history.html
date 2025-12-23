@@ -2,16 +2,8 @@
 {% block title %}History | CareMap{% endblock %}
 {% block extra_head %}
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&display=swap');
-
-        body {
-            font-family: "Figtree", sans-serif;
-            background-color: #ffffff;
-            color: #212529;
-            padding: 20px;
-        }
-
-        .container {
+        /* Page-local styles, avoid overriding global .container */
+        .history-container {
             background-color: #ffffff;
             padding: 2rem;
             border-radius: 15px;
@@ -55,7 +47,7 @@
         }
 
         @media (max-width: 768px) {
-            .container {
+            .history-container {
                 padding: 1.5rem;
             }
             
@@ -70,7 +62,7 @@
     </style>
 {% endblock %}
 {% block content %}
-    <div class="container mt-4 mt-md-5">
+    <div class="container history-container mt-4 mt-md-5">
         <h1 class="text-center mb-4">Your Diagnosis History</h1>
 
         {% if records %}
