@@ -159,6 +159,45 @@
             font-weight: 600;
             border-radius: 10px;
         }
+
+        /* Inline overlay with blurred background */
+        .inline-overlay {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(6px);
+            background: rgba(255, 255, 255, 0.35);
+            z-index: 1050;
+            display: none;
+        }
+        .inline-modal {
+            position: relative;
+            max-width: 900px; /* wide and consistent */
+            width: calc(100% - 32px); /* responsive padding on small screens */
+            margin: 10vh auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .inline-modal .modal-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .inline-modal .modal-body {
+            padding: 1rem;
+            max-height: 70vh; /* scroll inside modal, not page */
+            overflow-y: auto;
+        }
+        .inline-close {
+            border: none;
+            background: transparent;
+            color: #495057;
+            font-weight: 600;
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -172,8 +211,8 @@
                     <div class="hero-banner"></div>
                     <div class="hero-cta">
                         <div class="cta-buttons">
-                            <a href="/history" class="btn btn-light text-dark">View History</a>
-                            <a href="/chat" class="btn btn-primary">Start New Chat</a>
+                            <a href="/history" id="btnHistory" class="btn btn-light text-dark">View History</a>
+                            <a href="/chat" id="btnChat" class="btn btn-primary">Start New Chat</a>
                         </div>
                     </div>
                 </div>
@@ -191,9 +230,111 @@
                     CareMap harnesses the power of artificial intelligence to provide you with instant, personalized insights into your symptoms. By analyzing your unique health data, it helps you understand potential causes and guides you toward informed next steps — all from the convenience of your device.
                 </p>
                 
-                
-                
             </div>
         </div>
     </div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        (function() {
+            const overlayId = 'inlineOverlay';
+
+            function ensureOverlay() {
+                let overlay = document.getElementById(overlayId);
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.id = overlayId;
+                    overlay.className = 'inline-overlay';
+                    document.body.appendChild(overlay);
+                    // Close when clicking outside the modal
+                    overlay.addEventListener('click', function(e) {
+                        if (e.target.id === overlayId) hideOverlay();
+                    });
+                }
+                return overlay;
+            }
+
+            function showOverlay(contentHtml, titleText) {
+                const overlay = ensureOverlay();
+                overlay.innerHTML = `
+                    <div class="inline-modal">
+                        <div class="modal-header">
+                            <span>${titleText || ''}</span>
+                            <button class="inline-close" id="inlineClose">Close</button>
+                        </div>
+                        <div class="modal-body">${contentHtml}</div>
+                    </div>`;
+                overlay.style.display = 'block';
+                // Prevent background page from scrolling while modal is open
+                document.body.style.overflow = 'hidden';
+                const closeBtn = document.getElementById('inlineClose');
+                closeBtn && closeBtn.addEventListener('click', hideOverlay);
+            }
+
+            function hideOverlay() {
+                const overlay = document.getElementById(overlayId);
+                if (overlay) overlay.style.display = 'none';
+                // Restore background page scrolling
+                document.body.style.overflow = '';
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function renderChatFormHtml() {
+                const csrf = getCookie('csrftoken') || '';
+                return `
+                    <form action="/chat" method="post" id="inlineChatForm">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="${csrf}">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name"
+                                value="{% if request.user.is_authenticated and request.user.profile and request.user.profile.name %}{{ request.user.profile.name }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" id="age" name="age" class="form-control" placeholder="Enter your age" min="0"
+                                value="{% if request.user.is_authenticated and request.user.profile and request.user.profile.age %}{{ request.user.profile.age }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="symptoms" class="form-label">Describe Your Symptoms</label>
+                            <textarea id="symptoms" name="symptoms" class="form-control" rows="4" placeholder="Describe your symptoms"></textarea>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="use_history" name="use_history" checked>
+                            <label class="form-check-label" for="use_history">Include my past symptom history</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="history_title" class="form-label">Past History Title</label>
+                            <input type="text" id="history_title" name="history_title" class="form-control" placeholder="e.g., Recent medical issues">
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-outline-secondary" id="inlineClose2">Close</button>
+                        </div>
+                    </form>`;
+            }
+
+            // History: open default page via normal navigation (no overlay)
+
+            // Wire up events
+            const btnChat = document.getElementById('btnChat');
+            const btnHistory = document.getElementById('btnHistory');
+            if (btnChat) {
+                btnChat.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const html = renderChatFormHtml();
+                    showOverlay(html, 'Start a New Chat');
+                    setTimeout(() => {
+                        const close2 = document.getElementById('inlineClose2');
+                        close2 && close2.addEventListener('click', hideOverlay);
+                    }, 50);
+                });
+            }
+            // Do not intercept history; allow default navigation to /history
+        })();
+    </script>
 {% endblock %}

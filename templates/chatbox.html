@@ -1,155 +1,169 @@
+
 {% extends "layouts.html" %}
+{% load static %}
 {% block title %}Chat | CareMap{% endblock %}
+
 {% block extra_head %}
   <style>
-    body {
-      background-color: #ffffff; /* Bootstrap's secondary grey */
-      color: #ffffff; /* dark text */
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    /* Chat page customizable styles (inline) */
+    :root {
+      --chat-card-bg: #ffffff;
+      --chat-card-radius: 12px;
+      --chat-card-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+      --chat-header-bg: #f8f9fa;
+      --chat-header-border: #e9ecef;
+      --chat-container-min-height: 60vh;
+      --chat-max-width: 520px;
+    }
+
+    .chat-container {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .chat-card {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent;
+      border: none;
+    }
+
+    .chat-card .card-header {
+      background-color: var(--chat-header-bg);
+      border-bottom: 1px solid var(--chat-header-border);
+    }
+    /* Simple inline popup */
+    .inline-toast {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #212529;
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+      font-size: 0.95rem;
+      z-index: 1050;
+      display: none;
     }
   </style>
 {% endblock %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CareMap Chatbot</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body {
-      background-color: #ffffff; /* Bootstrap's secondary grey */
-      color: #ffffff; /* dark text */
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      padding: 1.5rem 0;
-    }
-
-    header h1 {
-      font-weight: 700;
-      text-align: center;
-      color: rgb(0, 0, 0);
-      text-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-    .main-container {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-    }
-
-    .form-container {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      max-width: 420px;
-      width: 100%;
-      padding: 2rem;
-      color: #212529;
-    }
-  </style>
-</head>
-<body>
 
 {% block content %}
-  <main class="main-container">
-    <div class="form-container">
-      <form action="/chat" method="post" class="needs-validation" novalidate>
-        {% csrf_token %}
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="form-control"
-            placeholder="Enter Your Name"
-            required
-            value="{{ initial_name|default:'' }}"
-          />
-          <div class="invalid-feedback">Please enter your name.</div>
-        </div>
+  <div class="container chat-container mt-4 mt-md-5">
+    <div class="card chat-card">
+      <div class="card-header">
+        <h5 class="mb-0">Start a New Chat</h5>
+      </div>
+      <div class="card-body">
+        <form action="/chat" method="post" id="chatForm">
+          {% csrf_token %}
 
-        <div class="mb-3">
-          <label for="age" class="form-label">Age</label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            class="form-control"
-            placeholder="Enter Your Age"
-            min="0"
-            required
-            value="{{ initial_age|default:'' }}"
-          />
-          <div class="invalid-feedback">Please enter your age.</div>
-        </div>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="Enter your name"
+              value="{{ initial_name|default:'' }}"
+            />
+            
+          </div>
 
-        <div class="mb-3">
-          <label for="symptoms" class="form-label">Describe Your Symptoms</label>
-          <textarea
-            id="symptoms"
-            name="symptoms"
-            class="form-control"
-            rows="4"
-            placeholder="Describe Your Symptoms"
-            required
-          ></textarea>
-          <div class="invalid-feedback">Please describe your symptoms.</div>
-        </div>
+          <div class="mb-3">
+            <label for="age" class="form-label">Age</label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              class="form-control"
+              placeholder="Enter your age"
+              min="0"
+              value="{{ initial_age|default:'' }}"
+            />
+            
+          </div>
 
-        <button type="submit" class="btn btn-success w-100 mb-3">Submit</button>
-      </form>
+          <div class="mb-3">
+            <label for="symptoms" class="form-label">Describe Your Symptoms</label>
+            <textarea
+              id="symptoms"
+              name="symptoms"
+              class="form-control"
+              rows="4"
+              placeholder="Describe your symptoms"
+            ></textarea>
+            
+          </div>
 
-      <button class="btn btn-outline-secondary w-100" onclick="window.history.back();">Go Back</button>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="use_history" name="use_history" checked>
+            <label class="form-check-label" for="use_history">Include my past symptom history</label>
+          </div>
+
+          <div class="mb-3">
+            <label for="history_title" class="form-label">Past History</label>
+            <input
+              type="text"
+              id="history_title"
+              name="history_title"
+              class="form-control"
+              placeholder="e.g., Recent medical issues"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+      </div>
+      <div class="card-footer bg-white">
+        <button class="btn btn-outline-secondary w-100" onclick="window.history.back();">Go Back</button>
+      </div>
     </div>
-  </main>
+  </div>
+  <div id="inlineToast" class="inline-toast">This is missing</div>
 {% endblock %}
+
 {% block extra_scripts %}
   <script>
-    // Bootstrap form validation
-    (() => {
-      'use strict';
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach((form) => {
-        form.addEventListener('submit', (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
+    (function() {
+      function showToast(message) {
+        var toast = document.getElementById('inlineToast');
+        toast.textContent = message || ' is missing';
+        toast.style.display = 'block';
+        setTimeout(function() {
+          toast.style.display = 'none';
+        }, 2000);
+      }
+
+      var form = document.getElementById('chatForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          var name = (document.getElementById('name').value || '').trim();
+          var age = (document.getElementById('age').value || '').trim();
+          var symptoms = (document.getElementById('symptoms').value || '').trim();
+
+          if (!name) {
+            e.preventDefault();
+            showToast('Name is missing');
           }
-          form.classList.add('was-validated');
-        }, false);
-      });
+          if ( !age ) {
+            e.preventDefault();
+            showToast('Age is missing');
+          }
+          if ( !symptoms) {
+            e.preventDefault();
+            showToast('Symptoms are missing');
+          }
+          
+        });
+      }
     })();
   </script>
 {% endblock %}
-
-  <script>
-    // Bootstrap form validation
-    (() => {
-      'use strict';
-      const forms = document.querySelectorAll('.needs-validation');
-      Array.from(forms).forEach((form) => {
-        form.addEventListener('submit', (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    })();
-  </script>
-
-</body>
-</html>

@@ -82,7 +82,7 @@ def chat_view(request: HttpRequest) -> HttpResponse:
             return render(request, 'apology.html', {'top': 403, 'bottom': 'must provide name, age, and symptoms'}, status=403)
 
         api_key = os.environ.get('GOOGLE_API_KEY') or os.environ.get('GENAI_API_KEY')
-        api_key = "AIzaSyB2my6BPN59Wm7nHsJm8SKt2705lnxUKZg"
+        api_key = "AIzaSyDqOUr0x3kD49W_ES5crGsCTyDHKgfKCWE"
 
         if not api_key:
             return render(request, 'apology.html', {'top': 500, 'bottom': 'Google API key missing. Set GOOGLE_API_KEY.'}, status=500)
@@ -97,17 +97,73 @@ def chat_view(request: HttpRequest) -> HttpResponse:
                 ]
             )
 
-            prompt = (
-                """Act as a medical assistant. Please analyze the following symptoms and provide:
-            1. A summary of possible causes.
-            2. A classification of severity (mild/moderate/severe).
-            3. Advice on whether to seek medical attention.
-            4. Output formatted clearly using headings and bullet points.
+            # Decide whether to include past history based on checkbox
+            use_history = (request.POST.get('use_history') == 'on')
+            history_title = (request.POST.get('history_title') or '').strip()
+            history_heading = history_title if history_title else ""
+            if use_history:
+                # Collect recent symptom history for this user and matching name
+                # Beginner-friendly: build a simple list of past symptoms (max 5)
+                past_qs = (
+                    DiagnosisHistory.objects
+                    .filter(user=request.user, name=name)
+                    .order_by('-timestamp')[:5]
+                    .values_list('symptoms', flat=True)
+                )
+                past_lines = []
+                for s in past_qs:
+                    if s:
+                        past_lines.append("- " + s)
+                if past_lines:
+                    past_history_block = "\n".join(past_lines)
+                else:
+                    past_history_block = "(no prior records found)"
+            else:
+                past_history_block = "(user chose not to include history)"
 
-            Symptoms: {symptoms}
-            given the age of the pateint : {age}
-            """.format(symptoms=symptoms, age=age)
-            )
+            History_given = ""
+            if past_history_block == "(user chose not to include history)":
+                if history_heading != "":
+                    History_given = history_heading
+                else : History_given = past_history_block
+            else:
+                History_given = history_heading + past_history_block
+
+            prompt = f"""
+            You are a health information assistant, NOT a doctor.
+
+            Your task is to help users understand symptoms at a high level.
+            Do NOT provide a medical diagnosis or prescribe treatment.
+
+            Based on the user's age and symptoms, provide:
+
+            1.Tell what you understand and what history you have about the patient
+            2. Possible general health categories that these symptoms may relate to 
+            (e.g., respiratory, digestive, neurological), not specific diseases.
+            3. A severity assessment (mild / moderate / severe) using common-sense risk factors 
+            such as symptom intensity, duration, and age-related risk.( If symptoms include sudden onset, neurological changes, chest pain, 
+breathing difficulty, or occur in elderly users, default severity to SEVERE.
+)
+            4. Clear guidance on whether the user should:
+            - Monitor at home
+            - Consult a doctor
+            - Seek urgent or emergency care
+            5. Red-flag symptoms that would require immediate medical attention.
+
+            Rules:
+            - Always express uncertainty.
+            - Never claim certainty or diagnosis.
+            - If symptoms suggest a potentially serious condition, prioritize safety.
+
+            User Information:
+            - Age: {age}
+            - Symptoms: {symptoms}
+
+            Past of the patient:
+            {History_given}
+
+            Format the output with clear headings and bullet points.
+            """
 
             response = chat.send_message(prompt, stream=True)
             diagnosis_text_raw = "".join(chunk.text for chunk in response).strip()
