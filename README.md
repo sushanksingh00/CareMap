@@ -28,9 +28,9 @@ Flask version (preserved):
 
 ### Screenshots
 
-![Homepage](Screenshot 2025-12-24 at 10.00.53 PM.png)
-![Chat View](Screenshot 2025-12-24 at 10.01.20 PM.png)
-![History Page](Screenshot 2025-12-24 at 10.01.32 PM.png)
+![Homepage](./Screenshot%202025-12-24%20at%2010.00.53%E2%80%AFPM.png)
+![Chat View](./Screenshot%202025-12-24%20at%2010.01.20%E2%80%AFPM.png)
+![History Page](./Screenshot%202025-12-24%20at%2010.01.32%E2%80%AFPM.png)
 
 #### Description:
 
