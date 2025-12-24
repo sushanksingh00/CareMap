@@ -70,7 +70,6 @@ def login_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'login.html')
 
 
-@login_required
 @require_http_methods(["GET", "POST"])
 def chat_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
@@ -169,13 +168,19 @@ breathing difficulty, or occur in elderly users, default severity to SEVERE.
             diagnosis_text_raw = "".join(chunk.text for chunk in response).strip()
             diagnosis_html = md.markdown(diagnosis_text_raw)
 
-            DiagnosisHistory.objects.create(
-                user=request.user,
-                name=name,
-                age=int(age),
-                symptoms=symptoms,
-                diagnosis=diagnosis_text_raw,
-            )
+            # Save history only if the user is logged in
+            if request.user.is_authenticated:
+                try:
+                    DiagnosisHistory.objects.create(
+                        user=request.user,
+                        name=name,
+                        age=int(age),
+                        symptoms=symptoms,
+                        diagnosis=diagnosis_text_raw,
+                    )
+                except Exception:
+                    # If age is not an int or any save issue occurs, skip saving
+                    pass
 
             return render(request, 'result.html', {"symp": diagnosis_html})
         except Exception as e:

@@ -289,6 +289,9 @@
                 return `
                     <form action="/chat" method="post" id="inlineChatForm">
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrf}">
+                        {% if not request.user.is_authenticated %}
+                        <div class="alert alert-info mb-3">Login to save chat and use personalized experience.</div>
+                        {% endif %}
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name"
@@ -303,10 +306,12 @@
                             <label for="symptoms" class="form-label">Describe Your Symptoms</label>
                             <textarea id="symptoms" name="symptoms" class="form-control" rows="4" placeholder="Describe your symptoms"></textarea>
                         </div>
+                        {% if request.user.is_authenticated %}
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="use_history" name="use_history" checked>
                             <label class="form-check-label" for="use_history">Include my past symptom history</label>
                         </div>
+                        {% endif %}
                         <div class="mb-3">
                             <label for="history_title" class="form-label">Past History Title</label>
                             <input type="text" id="history_title" name="history_title" class="form-control" placeholder="e.g., Recent medical issues">
