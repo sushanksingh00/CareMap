@@ -26,6 +26,12 @@ Flask version (preserved):
 
 #### Video Demo: https://www.youtube.com/watch?v=kwQX0F6eih4
 
+### Screenshots
+
+![Homepage](Screenshot 2025-12-24 at 10.00.53 PM.png)
+![Chat View](Screenshot 2025-12-24 at 10.01.20 PM.png)
+![History Page](Screenshot 2025-12-24 at 10.01.32 PM.png)
+
 #### Description:
 
 **CareMap** is a web-based health assistant that helps users understand potential medical conditions based on symptoms they enter. It was developed as my final project for CS50x, with the goal of giving people a simple, accessible tool to check their health concerns from home.
