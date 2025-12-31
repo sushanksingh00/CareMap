@@ -81,7 +81,6 @@ def chat_view(request: HttpRequest) -> HttpResponse:
             return render(request, 'apology.html', {'top': 403, 'bottom': 'must provide name, age, and symptoms'}, status=403)
 
         api_key = os.environ.get('GOOGLE_API_KEY') or os.environ.get('GENAI_API_KEY')
-        api_key = "AIzaSyDqOUr0x3kD49W_ES5crGsCTyDHKgfKCWE"
 
         if not api_key:
             return render(request, 'apology.html', {'top': 500, 'bottom': 'Google API key missing. Set GOOGLE_API_KEY.'}, status=500)

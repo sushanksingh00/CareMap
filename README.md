@@ -34,7 +34,7 @@ Flask version (preserved):
 
 #### Description:
 
-**CareMap** is a web-based health assistant that helps users understand potential medical conditions based on symptoms they enter. It was developed as my final project for CS50x, with the goal of giving people a simple, accessible tool to check their health concerns from home.
+**CareMap** is a web-based health assistant that helps users understand potential medical conditions based on symptoms they enter. It was developed as my final project for CS50w, with the goal of giving people a simple, accessible tool to check their health concerns from home.
 
 We often ignore small symptoms, or panic over things that turn out to be minor. CareMap tries to reduce both confusion and unnecessary stress. By simply entering symptoms like “headache,” “chest pain,” or “tiredness,” users can get a list of possible medical conditions that match what they’re feeling. The app uses the Gemini API to intelligently generate these suggestions. It’s not meant to replace a doctor, but it helps people get an early idea of whether something might need attention.
 
