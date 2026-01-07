@@ -1,81 +1,92 @@
 # CareMap
 
-Note: Project now uses Django for the web backend. The original Flask implementation is preserved under `flask_app/`.
+## Overview
 
-Quick start (Django):
+CareMap is a Django-based web application designed to help users record, interpret, and track health-related symptoms in a structured, private, and non-diagnostic way. Authenticated users can enter symptoms they are experiencing and receive high-level informational insights generated using an AI language model. Each interaction is stored so users can review their symptom history over time.
 
-1. Create/activate a virtualenv and install deps:
+The purpose of CareMap is not to diagnose medical conditions or replace professional medical advice. Instead, it serves as a personal health-awareness and symptom journaling tool, helping users notice patterns, reflect on recurring issues, and make more informed decisions about when seeking medical attention may be appropriate.
 
-	- `pip install -r requirements.txt`
-
-2. Run database migrations:
-
-	- `python manage.py migrate`
-
-3. Start the dev server:
-
-	- `python manage.py runserver`
-
-App will be available at http://127.0.0.1:8000/.
-
-Flask version (preserved):
-
-- Code: `flask_app/`
-- Requirements: `flask_app/requirements.txt`
-- Original entry file: `flask_app/app.py`
-
-#### Video Demo: https://www.youtube.com/watch?v=kwQX0F6eih4
-
-### Screenshots
-
-![Homepage](./Screenshot%202025-12-24%20at%2010.00.53%E2%80%AFPM.png)
-![Chat View](./Screenshot%202025-12-24%20at%2010.01.20%E2%80%AFPM.png)
-![History Page](./Screenshot%202025-12-24%20at%2010.01.32%E2%80%AFPM.png)
-
-#### Description:
-
-**CareMap** is a web-based health assistant that helps users understand potential medical conditions based on symptoms they enter. It was developed as my final project for CS50w, with the goal of giving people a simple, accessible tool to check their health concerns from home.
-
-We often ignore small symptoms, or panic over things that turn out to be minor. CareMap tries to reduce both confusion and unnecessary stress. By simply entering symptoms like “headache,” “chest pain,” or “tiredness,” users can get a list of possible medical conditions that match what they’re feeling. The app uses the Gemini API to intelligently generate these suggestions. It’s not meant to replace a doctor, but it helps people get an early idea of whether something might need attention.
-
-### How it Works
-
-When a user visits the site, they’re greeted with a login/register option. Once authenticated, they can enter one or more symptoms into a form. When the form is submitted, the backend sends those symptoms to the Gemini API, which processes the input and returns possible matching conditions. These results are then displayed directly below, along with some basic information that can guide the user’s next steps.
-
-Each user's search history is stored in a database, so they can log in later and revisit past results. This is useful for tracking recurring issues or showing a doctor what symptoms were experienced and when.
-
-I designed CareMap to handle both mild and serious situations. For example, if someone enters “sore throat,” the suggestions might include minor issues like a cold or allergies. But entering “chest pain” might return more serious risks like a heart condition. This contrast is intentional — I wanted the app to be equally useful for daily health questions and early warnings about critical problems.
-
-### Technologies Used
-
-The backend is written in **Python using Flask**, which handles routing, session management, form processing, and API interaction. For the database, I used **SQLite**, which stores user credentials and symptom history. On the frontend, I used **HTML, CSS, and vanilla JavaScript** to keep the UI simple and responsive.
-
-The integration with **Gemini API** is the heart of the project. It takes a string of symptoms as input and returns a medical response based on Gemini’s intelligent language model. I chose Gemini because it’s flexible, fast, and capable of handling vague or mixed symptom descriptions.
-
-The project folder contains the following files:
-
-- `app.py` – Main Flask application with all backend logic: routes for login, register, logout, form submission, and history display.
-- `templates/` – Folder containing HTML templates (`login.html`, `register.html`, `index.html`, etc.).
-- `static/` – Contains CSS and JS files for styling and basic interactivity.
-- `schema.sql` – SQL schema for setting up the database.
-- `helpers.py` – Contains helper functions like password hashing, login checks, and database queries.
-- `README.md` – This file, which explains the entire project.
-- `history.db` – SQLite database containing user accounts and saved search results.
-
-### Design Decisions
-
-One of the key decisions was to keep the interface minimal. I wanted it to feel like a lightweight assistant — no clutter, just input and output. Users don’t need medical knowledge to use the app. They just type what they feel, and the app tries to help.
-
-I also debated between using a large pre-built medical database versus relying on an AI API. I chose Gemini because it allows more flexible, natural symptom input, rather than exact keyword matches. This makes the experience feel more human and conversational.
-
-Security was important as well. Passwords are hashed before storing, and session handling ensures users can't access data that isn’t theirs. I didn’t implement email verification due to time constraints, but that could be added later.
-
-### Future Improvements
-
-I plan to add a **Profile** tab, where users can edit their name, contact info, and view an extended medical history chart. I also want to add a **Nearby Doctors** feature, which recommends medical professionals in the user’s city based on the symptoms entered. This would involve integrating Google Maps API or similar services.
-
-Another possible upgrade is allowing users to enter symptoms via voice input, and receiving spoken responses. This would make CareMap even more accessible to users with limited literacy or tech experience.
+This project was developed as the final capstone for CS50’s Web Programming with Python and JavaScript.
 
 ---
 
-CareMap is more than just a class project to me. It’s something I built to solve a real problem — the gap between worrying about health and knowing what steps to take. Through CS50, I learned how to go from an idea to a working product that could genuinely help people. I’m proud of what I’ve built and excited to keep improving it.
+## Distinctiveness and Complexity
+
+CareMap is distinct from all prior CS50W projects in both domain focus and technical design. Unlike Project 4 (Social Network), this application contains no social functionality: users cannot follow others, post publicly, like content, or interact through shared feeds. All data is private and accessible only to the authenticated user. Unlike Project 2 (E-Commerce), CareMap does not involve products, listings, payments, carts, or transactions. Its core purpose is not commercial interaction but structured personal data tracking and interpretation.
+
+What the project is can be described as a personal health information system that combines user authentication, persistent data storage, AI-assisted interpretation, and dynamic frontend behavior. Users submit symptom data, which is processed server-side, passed through a carefully constrained AI prompt, and returned as informational output. Each query is stored chronologically, allowing users to review and reflect on their symptom history over time. This longitudinal tracking component fundamentally differentiates CareMap from simple CRUD applications.
+
+From a complexity perspective, the project goes beyond earlier coursework by integrating multiple non-trivial components. The backend uses Django models to manage users and symptom history, enforces authentication and access control, and securely coordinates interactions with an external AI API. The frontend relies on JavaScript to submit symptom queries asynchronously, render responses dynamically, and update history views without full page reloads. Additionally, the project required careful design decisions to ensure that AI-generated responses remain informational rather than diagnostic, adding both ethical and technical complexity.
+
+Together, these elements form a system that required architectural planning, backend–frontend coordination, and thoughtful constraint of AI behavior, making CareMap both distinct and substantially more complex than previous projects in the course.
+
+---
+
+## Technologies Used
+
+- Python & Django – Backend framework for routing, authentication, models, and database interaction  
+- SQLite – Persistent storage for user accounts and symptom history  
+- JavaScript – Dynamic frontend behavior and asynchronous requests  
+- HTML & CSS – Templating and responsive user interface  
+- Gemini API – Generates high-level informational responses based on user-entered symptoms  
+
+Note: An earlier Flask-based prototype of this project is preserved for reference under `flask_app/`, but the primary and evaluated implementation uses Django, in accordance with CS50W requirements.
+
+---
+
+## File Structure and Contents
+
+- manage.py – Django project entry point used to run the server and manage commands  
+- caremap/ – Django project configuration directory  
+  - settings.py – Project settings, installed apps, middleware, and database configuration  
+  - urls.py – Root URL configuration  
+- tracker/ – Main Django application  
+  - models.py – Defines database models for storing user symptom queries and timestamps  
+  - views.py – Handles request logic, form submission, AI API interaction, and response rendering  
+  - urls.py – Application-specific URL routes  
+  - templates/ – HTML templates for login, registration, symptom input, and history pages  
+  - static/ – CSS and JavaScript files for styling and frontend interactivity  
+- requirements.txt – Python dependencies required to run the Django application  
+- flask_app/ – Archived Flask-based prototype of the project (not part of final evaluation)  
+- README.md – Project documentation  
+
+---
+
+## How to Run the Application
+
+1. Clone the repository and navigate into the project directory  
+2. Create and activate a virtual environment  
+3. Install dependencies using:
+
+   pip install -r requirements.txt
+
+4. Apply database migrations using:
+
+   python manage.py migrate
+
+5. Start the development server using:
+
+   python manage.py runserver
+
+6. Open a browser and visit:
+
+   http://127.0.0.1:8000/
+
+---
+
+## Design Decisions
+
+One key design decision was to keep the user interface minimal and focused. The application is intended to feel like a lightweight assistant rather than a complex medical system, reducing cognitive load and making it accessible to non-technical users.
+
+Another major decision was to use an AI language model rather than a fixed medical database. This allows users to enter symptoms in natural language rather than relying on predefined keywords. To address ethical concerns, the AI prompt is explicitly constrained to provide informational, non-diagnostic responses and encourage professional consultation when appropriate.
+
+Security considerations were also important. Passwords are hashed, sessions are securely managed, and users are restricted to accessing only their own data. Features such as email verification were intentionally excluded to keep the project focused and manageable within the course scope.
+
+---
+
+## Additional Information
+
+CareMap intentionally avoids providing medical diagnoses or treatment recommendations. All output is informational and designed to support awareness rather than decision-making.
+
+A short video demonstration of the application is available here:  
+https://www.youtube.com/watch?v=kwQX0F6eih4
