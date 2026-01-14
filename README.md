@@ -30,24 +30,28 @@ Together, these elements form a system that required architectural planning, bac
 - HTML & CSS – Templating and responsive user interface  
 - Gemini API – Generates high-level informational responses based on user-entered symptoms  
 
-Note: An earlier Flask-based prototype of this project is preserved for reference under `flask_app/`, but the primary and evaluated implementation uses Django, in accordance with CS50W requirements.
+Note: An earlier Flask-based prototype of this project is preserved for reference under `_archive/unnecessary/flask_app/`, but the primary and evaluated implementation uses Django, in accordance with CS50W requirements.
 
 ---
 
 ## File Structure and Contents
 
 - manage.py – Django project entry point used to run the server and manage commands  
-- caremap/ – Django project configuration directory  
-  - settings.py – Project settings, installed apps, middleware, and database configuration  
-  - urls.py – Root URL configuration  
-- tracker/ – Main Django application  
-  - models.py – Defines database models for storing user symptom queries and timestamps  
-  - views.py – Handles request logic, form submission, AI API interaction, and response rendering  
-  - urls.py – Application-specific URL routes  
-  - templates/ – HTML templates for login, registration, symptom input, and history pages  
-  - static/ – CSS and JavaScript files for styling and frontend interactivity  
+- caremap_site/ – Django project configuration directory  
+   - settings.py – Project settings, installed apps, middleware, and database configuration  
+   - urls.py – Root URL configuration  
+   - asgi.py, wsgi.py – ASGI/WSGI entry points  
+- caremap/ – Main Django application  
+   - apps.py – App configuration  
+   - models.py – Defines database models for storing user symptom queries and timestamps  
+   - views.py – Handles request logic, form submission, AI API interaction, and response rendering  
+   - urls.py – Application-specific URL routes  
+   - migrations/ – Django migrations for database schema  
+- templates/ – HTML templates for login, registration, symptom input, and history pages  
+- static/ – CSS and JavaScript files for styling and frontend interactivity  
 - requirements.txt – Python dependencies required to run the Django application  
-- flask_app/ – Archived Flask-based prototype of the project (not part of final evaluation)  
+- db.sqlite3 – SQLite database used for local development  
+- _archive/unnecessary/flask_app/ – Archived Flask-based prototype of the project (not part of final evaluation)  
 - README.md – Project documentation  
 
 ---

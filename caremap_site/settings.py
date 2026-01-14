@@ -83,3 +83,9 @@ LOGIN_URL = '/login'
 CSRF_TRUSTED_ORIGINS = [
     "https://*.trycloudflare.com"
 ]
+
+DEBUG = False
+
+ALLOWED_HOSTS = ["*"]  # temporary, tighten later
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
