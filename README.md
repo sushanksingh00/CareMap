@@ -94,3 +94,15 @@ CareMap intentionally avoids providing medical diagnoses or treatment recommenda
 
 A short video demonstration of the application is available here:  
 https://www.youtube.com/watch?v=kwQX0F6eih4
+
+---
+
+## Screenshots
+
+Below are three screenshots of the application UI:
+
+![Screenshot 1](Screenshot%202025-12-24%20at%2010.00.53%E2%80%AFPM.png)
+
+![Screenshot 2](Screenshot%202025-12-24%20at%2010.01.20%E2%80%AFPM.png)
+
+![Screenshot 3](Screenshot%202025-12-24%20at%2010.01.32%E2%80%AFPM.png)
