@@ -5,9 +5,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'dev-insecure-secret-key-change-me')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]  # temporary, tighten later
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -71,8 +71,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
+STATIC_URL = "/static/"
+
+# During deployment, collectstatic will gather assets here.
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# In development, serve app-level and project-level static assets.
+STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -83,9 +88,3 @@ LOGIN_URL = '/login'
 CSRF_TRUSTED_ORIGINS = [
     "https://*.trycloudflare.com"
 ]
-
-DEBUG = False
-
-ALLOWED_HOSTS = ["*"]  # temporary, tighten later
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
